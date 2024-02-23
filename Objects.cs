@@ -9,6 +9,7 @@ namespace ConsoleApp4
 {
     public class Objects
     {
+        /*
         static void Main()
         {
             List<Product> products = new List<Product>();
@@ -43,5 +44,6 @@ namespace ConsoleApp4
         
         
         }
+        */
     }
 }

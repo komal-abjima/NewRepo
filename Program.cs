@@ -8,5 +8,6 @@ namespace ProgramClass
         public string productName { get; set; }
         public double Price { get; set; }
         public DateTime DateOfManufacture { get; set; } 
+    
     }
 }
