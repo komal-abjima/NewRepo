@@ -14,11 +14,25 @@ app.Run(async (HttpContext context) =>
     //    context.Response.StatusCode = 400;
 
     //}
-    context.Response.Headers["Mykey"] = "my Values";
-    context.Response.Headers["Server"] = "my server";
+    //context.Response.Headers["Mykey"] = "my Values";
+    //context.Response.Headers["Server"] = "my server";
+
+    //string path = context.Request.Path;
+    //string method = context.Request.Method;
+
     context.Response.Headers["Content-Type"] = "text/html";
-    await context.Response.WriteAsync("<h1>Hello</h1>");
-    await context.Response.WriteAsync("<h2>Dot Net</h2>");
+
+    if(context.Request.Method == "GET")
+    {
+        if (context.Request.Query.ContainsKey("id"))
+        {
+            string id = context.Request.Query["id"];
+            await context.Response.WriteAsync($"<p>{id}</p>");
+        }
+    }
+
+    //await context.Response.WriteAsync($"<p>{path}</p>");
+    //await context.Response.WriteAsync($"<p>{method}</p>");
 });
 
 app.Run();
