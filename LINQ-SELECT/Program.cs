@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp4.ELEMENTAT_AND_ELEMENTATORDEFAULT
+namespace ConsoleApp4.LINQ_SELECT
 {
     //class Employee
     //{
@@ -13,34 +13,30 @@ namespace ConsoleApp4.ELEMENTAT_AND_ELEMENTATORDEFAULT
     //    public string Job { get; set; }
     //    public double Salary { get; set; }
     //}
+
+    //class Person
+    //{
+    //    public string PersonName { get; set; }
+    //}
     //class Program
     //{
     //    static void Main()
     //    {
     //        List<Employee> employees = new List<Employee>()
     //        {
-    //        new Employee() { EmpId = 1, EmpName = "Henry", Job = "Deisgner", Salary = 100000 },
+    //        new Employee() { EmpId = 1, EmpName = "Henry", Job = "Designer", Salary = 100000 },
     //        new Employee() { EmpId = 2, EmpName = "YUVI", Job = "Manager", Salary = 20000 },
     //        new Employee() { EmpId = 3, EmpName = "Rishi", Job = "Manager", Salary = 3000 }
     //        };
 
 
-    //        //ElementAt
-    //        Employee resultEmp = employees.Where(emp => emp.Job == "Manager").ElementAt(1);
-    //        Console.WriteLine(resultEmp.EmpId + "," + resultEmp.EmpName);
-
-    //        //ElementAtOrDefault
-    //        Employee resultEmp2 = employees.Where(emp => emp.Job == "Clerk").ElementAtOrDefault(4);
-    //        if (resultEmp2 != null)
+    //        //Select
+    //        List<Person> result = employees.Select(emp => new Person() { PersonName = emp.EmpName }).ToList();
+    //        foreach(Person person in result)
     //        {
-    //            Console.WriteLine(resultEmp2.EmpId + "," + resultEmp2.EmpName);
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("No clerk in the list");
-    //        }
+    //            Console.WriteLine(person.PersonName);
 
-
+    //        }
 
     //        Console.ReadKey();
 
