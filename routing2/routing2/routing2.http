@@ -1,0 +1,6 @@
+@routing2_HostAddress = http://localhost:5259
+
+GET {{routing2_HostAddress}}/valuesControllers/
+Accept: application/json
+
+###

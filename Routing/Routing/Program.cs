@@ -1,41 +1,44 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+//var builder = WebApplication.CreateBuilder(args);
+//var app = builder.Build();
 
-//app.MapGet("/", () => "Hello World!");
+//app.Use(async (context, next) =>
+//{
+//    Microsoft.AspNetCore.Http.Endpoint? endPoint = context.GetEndpoint();
+//    if (endPoint != null)
+//    {
+//        await context.Response.WriteAsync($"Endpoint: {endPoint.DisplayName}\n");
+//    }
+//    await next(context);
+//});
 
-//enabled routing
-app.UseRouting();
+////enable routing
+//app.UseRouting();
 
-//creating end points
-app.UseEndpoints(endpoints =>
-{
-    //endpoints.Map("map1", async (context) =>
-    //{
-    //    await context.Response.WriteAsync("In map 1");
-    //});
+//app.Use(async (context, next) =>
+//{
+//    Microsoft.AspNetCore.Http.Endpoint? endPoint = context.GetEndpoint();
+//    if (endPoint != null)
+//    {
+//        await context.Response.WriteAsync($"Endpoint: {endPoint.DisplayName}\n");
+//    }
 
-    //endpoints.Map("map2", async (context) =>
-    //{
-    //    await context.Response.WriteAsync("In map 2");
-    //});
+//    await next(context);
+//});
 
-    endpoints.MapGet("map1", async (context) =>
-    {
-        await context.Response.WriteAsync("In map 1");
+////creating endpoints
+//app.UseEndpoints(endpoints =>
+//{
+//    //add your endpoints here
+//    endpoints.MapGet("map1", async (context) => {
+//        await context.Response.WriteAsync("In Map 1");
+//    });
 
-    });
+//    endpoints.MapPost("map2", async (context) => {
+//        await context.Response.WriteAsync("In Map 2");
+//    });
+//});
 
-    endpoints.MapPost("map2", async (context) =>
-    {
-        await context.Response.WriteAsync("In map 1");
-
-    });
-
-});
-
-app.Run(async context =>
-{
-    await context.Response.WriteAsync($"Request received at {context.Request.Path}");
-});
-
-app.Run();
+//app.Run(async context => {  
+//    await context.Response.WriteAsync($"Request received at {context.Request.Path}");
+//});
+//app.Run();
