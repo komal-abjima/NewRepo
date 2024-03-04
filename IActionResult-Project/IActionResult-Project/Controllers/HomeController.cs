@@ -41,7 +41,21 @@ namespace IActionResult_Project.Controllers
                 return Content("User must be authenticated");
             }
 
-            return File("/sample.pdf", "application/pdf");
+            //return File("/sample.pdf", "application/pdf");
+            //return new RedirectToActionResult("Books", "Store", new { }); //302- Moved
+            //return new RedirectToActionResult("Books", "Store", new { }, permanent: true); //301- Moved Permanently
+            //return RedirectToAction("Books", "Store", new { id = bookId });
+            //return RedirectToActionPermanent("Books", "Store", new { id = bookId });
+
+            //302-Found -LocalRedirectResult
+            //return new LocalRedirectResult($"store/books/{bookId}"); //302- found
+            //return LocalRedirect($"store/books/{bookId}");
+
+            //301-moved Permanently
+            //return new LocalRedirectResult($"store/books/{bookId}", true);
+            return RedirectPermanent($"store/books/{bookId}"); //301-moved permanently
+
+
         }
     }
 }
