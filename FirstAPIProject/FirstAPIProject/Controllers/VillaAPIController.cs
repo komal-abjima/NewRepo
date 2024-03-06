@@ -14,12 +14,17 @@ namespace FirstAPIProject.Controllers
     public class VillaAPIController : ControllerBase
     {
         //private readonly ILogger<VillaAPIController> _logger;
-        private readonly ILogging _logger;
+
+        //custom logger
+        //private readonly ILogging _logger;
 
         //public VillaAPIController(Logger<VillaAPIController> logger)
-        public VillaAPIController(ILogging logger)
+        //public VillaAPIController(ILogging logger)
+        private readonly ApplicationDbContext _db;
+        public VillaAPIController(ApplicationDbContext db)
         {
-            _logger = logger;
+            //_logger = logger;
+            _db = db;
             
         }
 
@@ -28,9 +33,10 @@ namespace FirstAPIProject.Controllers
         //public IEnumerable<VillaDto> GetVillas()
         public ActionResult<IEnumerable<VillaDto>> GetVillas()
         {
-            _logger.Log("Getting all villas","");
+            //_logger.Log("Getting all villas","");
             //return VillaStore.villaList;
-            return Ok(VillaStore.villaList);
+            //return Ok(VillaStore.villaList);
+            return Ok(_db.villas.ToList());
         }
 
         [HttpGet("{id:int}", Name = "GetVilla")]
@@ -45,7 +51,8 @@ namespace FirstAPIProject.Controllers
             {
                 return BadRequest();
             }
-            var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            //var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            var villa = _db.villas.FirstOrDefault(x => x.Id == id);
 
             if (villa == null)
             {
@@ -61,7 +68,8 @@ namespace FirstAPIProject.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<VillaDto> CreateVilla([FromBody] VillaDto villadto)
         {
-            if (VillaStore.villaList.FirstOrDefault(u => u.Name.ToLower() == villadto.Name.ToLower()) != null)
+            //if (VillaStore.villaList.FirstOrDefault(u => u.Name.ToLower() == villadto.Name.ToLower()) != null)
+            if (_db.villas.FirstOrDefault(u => u.Name.ToLower() == villadto.Name.ToLower()) != null)
             {
                 ModelState.AddModelError("CustomError", "Villa already Exists");
                 return BadRequest(ModelState);
@@ -74,8 +82,21 @@ namespace FirstAPIProject.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            villadto.Id = VillaStore.villaList.OrderByDescending(u => u.Id).FirstOrDefault().Id + 1;
-            VillaStore.villaList.Add(villadto);
+            //villadto.Id = VillaStore.villaList.OrderByDescending(u => u.Id).FirstOrDefault().Id + 1;
+            //VillaStore.villaList.Add(villadto);
+            Villa model = new()
+            {
+                Amenity = villadto.Amenity,
+                Details = villadto.Details,
+                Id = villadto.Id,
+                ImageUrl = villadto.ImageUrl,
+                Name = villadto.Name,
+                Occupancy = villadto.Occupacy,
+                Rate = villadto.Rate,
+                Sqft = villadto.sqft
+            };
+            _db.villas.Add(model);
+            _db.SaveChanges();
 
             //return Ok(villadto);
             return CreatedAtRoute("GetVilla", new { id = villadto.Id }, villadto);
@@ -90,12 +111,15 @@ namespace FirstAPIProject.Controllers
             {
                 return BadRequest();
             }
-            var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            //var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            var villa = _db.villas.FirstOrDefault(u => u.Id == id);
             if (villa == null)
             {
                 return NotFound();
             }
-            VillaStore.villaList.Remove(villa);
+            //VillaStore.villaList.Remove(villa);
+            _db.villas.Remove(villa);
+            _db.SaveChanges();
             return NoContent();
         }
 
@@ -107,10 +131,25 @@ namespace FirstAPIProject.Controllers
                 return BadRequest();
 
             }
-            var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
-            villa.Name = villadto.Name;
-            villa.Occupacy = villadto.Occupacy;
-            villa.sqft = villadto.sqft;
+            //var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            //villa.Name = villadto.Name;
+            //villa.Occupacy = villadto.Occupacy;
+            //villa.sqft = villadto.sqft;
+
+            Villa model = new()
+            {
+                Id = villadto.Id,
+                Name = villadto.Name,
+                Details = villadto.Details,
+                Occupancy = villadto.Occupacy,
+                Sqft = villadto.sqft,
+                Amenity = villadto.Amenity,
+                ImageUrl = villadto.ImageUrl,
+                Rate = villadto.Rate
+            };
+
+            _db.villas.Update(model);
+            _db.SaveChanges();
 
             return NoContent();
         }
@@ -124,12 +163,27 @@ namespace FirstAPIProject.Controllers
             {
                 return BadRequest();
             }
-            var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            //var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            var villa = _db.villas.FirstOrDefault(u => u.Id == id);
+            VillaDto villaDto = new()
+            {
+                Amenity = villa.Amenity,
+                Details = villa.Details,
+                Id = villa.Id,
+                Name = villa.Name,
+                Occupacy = villa.Occupancy,
+                ImageUrl = villa.ImageUrl,
+                sqft = villa.Sqft
+                    
+            };
+            
             if (villa == null)
             {
                 return BadRequest();
             }
-            patchdto.ApplyTo(villa, ModelState);
+            // patchdto.ApplyTo(villa, ModelState);
+            patchdto.ApplyTo(villaDto, ModelState);
+          
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

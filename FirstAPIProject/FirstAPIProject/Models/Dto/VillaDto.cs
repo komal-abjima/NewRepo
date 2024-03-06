@@ -10,5 +10,11 @@ namespace FirstAPIProject.Models.Dto
         public string Name { get; set; }
         public int Occupacy { get; set; }
         public int sqft { get; set; }
+
+        public string Details { get; set; }
+        [Required]
+        public double Rate {  get; set; }
+        public string ImageUrl { get; set; }
+        public string Amenity { get; set; }
     }
 }
