@@ -1,0 +1,23 @@
+[
+  {
+    "PersonID": "B463D1AD-D957-4C31-B6B5-9B983851C260",
+    "PersonName": "John",
+    "Email": "John@mail.com",
+    "DateOfBirth": "1998-03-02",
+    "Gender": "Male",
+    "CountryID": "56E16AF6-3418-4B2C-A279-F893BA65CD0C",
+    "Address": "4 AK Nagar",
+    "ReceiveNewsLetters": false
+  },
+  {
+    "PersonID": "B463D1AD-D957-4C31-B6B5-9B983851C260",
+    "PersonName": "Julie",
+    "Email": "julie@mail.com",
+    "DateOfBirth": "1996-11-02",
+    "Gender": "Female",
+    "CountryID": "4E87CBC6-1EDF-4B52-B9D9-4E61BF1B48B3",
+    "Address": "7 abc",
+    "ReceiveNewsLetters": true
+  }
+
+]

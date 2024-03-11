@@ -1,0 +1,6 @@
+@Section_18_EntityFrameworkCore_PracticeCode_HostAddress = http://localhost:5211
+
+GET {{Section_18_EntityFrameworkCore_PracticeCode_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
