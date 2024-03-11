@@ -10,9 +10,8 @@ using Third_API_Project.Models;
 
 namespace Third_API_Project.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CitiesController : ControllerBase
+  
+    public class CitiesController : CustomControllerBase
     {
         private readonly ApplicationDbContext _context;
 
