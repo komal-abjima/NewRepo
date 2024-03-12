@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Section_18_EntityFrameworkCore_PracticeCode.Data;
 using Section_18_EntityFrameworkCore_PracticeCode.Repository;
 
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,6 +16,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddTransient<IBookRepository,  BookRepository>();
+//builder.Services.AddScoped<IBookRepository, BookRepository>();
+//builder.Services.AddSingleton<IBookRepository, BookRepository>();
+//builder.Services.TryAddSingleton<IBookRepository, BookRepository>();
+//builder.Services.TryAddScoped<IBookRepository, BookRepository>();
+//builder.Services.TryAddTransient<IBookRepository, BookRepository>();
+
+
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
