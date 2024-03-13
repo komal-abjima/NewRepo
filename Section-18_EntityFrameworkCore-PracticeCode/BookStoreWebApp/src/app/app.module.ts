@@ -4,17 +4,22 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule, NgFor } from '@angular/common';
-
-
+import { AllBooksComponent } from './all-books/all-books.component';
+import { AddBookComponent } from './add-book/add-book.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AllBooksComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
     
   ],
   providers: [],

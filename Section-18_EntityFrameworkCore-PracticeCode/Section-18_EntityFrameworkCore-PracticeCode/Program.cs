@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Section_18_EntityFrameworkCore_PracticeCode.Data;
+using Section_18_EntityFrameworkCore_PracticeCode.Models;
 using Section_18_EntityFrameworkCore_PracticeCode.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +36,8 @@ builder.Services.AddCors(option =>
 });
 
 var app = builder.Build();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

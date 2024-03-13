@@ -6,17 +6,19 @@
         <th scope="col">Description</th>
        
       </tr>
+      
     </thead>
-    <tbody>
-      <tr *ngFor="let book of books">
-        <h3>{{book.Title}}</h3>
-        <th scope="row">{{book.Id}}</th>
-        <td>{{book.Title}}</td>
-        <td>{{book.Description}}</td>
+    <tbody >
+      <tr *ngFor="let book of books">       
+        <td>{{book.id}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.description}}</td>
        
       </tr>
       
     </tbody>
   </table>
+
+
 
   
