@@ -69,3 +69,6 @@ Identity core has everything that is required to work with the authentication an
 Signup, Login, Change password, Forgot password,
 Multifactor authentication,
 login with third party app like google, facebook, microsoft etc
+if you are not using a new application user class then it is ok to use IdentityDbContext instead 
+of DbContext but if you are using Application user class then it is necessary to use 
+IdentityDbContext<ApplicationUser>

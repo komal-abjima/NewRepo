@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Tokens;
 using Section_18_EntityFrameworkCore_PracticeCode.Data;
 using Section_18_EntityFrameworkCore_PracticeCode.Models;
 using Section_18_EntityFrameworkCore_PracticeCode.Repository;
+using System.Configuration;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +21,37 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+//add identity class
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
+//add token authentication 
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(option =>
+{
+    option.SaveToken = true;
+    option.RequireHttpsMetadata = true;
+    option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+
+    };
+});
+
+
+
 builder.Services.AddTransient<IBookRepository,  BookRepository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 //builder.Services.AddScoped<IBookRepository, BookRepository>();
 //builder.Services.AddSingleton<IBookRepository, BookRepository>();
 //builder.Services.TryAddSingleton<IBookRepository, BookRepository>();
@@ -36,8 +70,7 @@ builder.Services.AddCors(option =>
 });
 
 var app = builder.Build();
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -47,11 +80,15 @@ if (app.Environment.IsDevelopment())
 }
 app.UseRouting();
 app.UseCors();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-app.UseAuthorization();
+
 
 app.MapControllers();
 
