@@ -1,0 +1,15 @@
+mat-toolbar {
+  background-color: #282828;
+    .spacer {
+      flex: 1 1 auto;
+    }
+  
+    .user-info {
+      display: flex;
+      align-items: center;
+  
+      button {
+        margin-left: 1.5rem;
+      }
+    }
+  }
