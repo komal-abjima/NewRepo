@@ -1,3 +1,5 @@
+npm install @auth0/angular-jwt - basically this package creates an interceptor for every HTTP request and sends jwt token in it.
+
 # LibraryMngmtUI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.

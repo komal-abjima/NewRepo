@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -47,7 +47,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { BookStoreComponent } from './books/book-store/book-store.component';
+import { UserOrdersComponent } from './users/user-orders/user-orders.component';
+import { ProfileComponent } from './users/profile/profile.component';
+import { MaintenanceComponent } from './books/maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,11 @@ import { HttpClientModule } from '@angular/common/http';
     PageSideNavComponent,
     PageNotFoundComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookStoreComponent,
+    UserOrdersComponent,
+    ProfileComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +111,18 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    importProvidersFrom(
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: () => {
+            return localStorage.getItem('access_token');
+          },
+          allowedDomains: ['localhost:7287']
+        }
+      })
+    ),
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })

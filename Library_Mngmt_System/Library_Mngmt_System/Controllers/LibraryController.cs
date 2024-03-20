@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Library_Mngmt_System.EmailServicee;
 using Library_Mngmt_System.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Library_Mngmt_System.Controllers
 {
@@ -78,6 +81,49 @@ namespace Library_Mngmt_System.Controllers
                 return Ok(_js.GenerateToken(user));
             }
             return Ok("not found");
+        }
+
+        [Authorize]
+        [HttpGet("GetBooks")]
+        public ActionResult GetBooks()
+        {
+            if (_db.books.Any())
+            {
+                return Ok(_db.books.Include(b => b.BookCategory).ToList());
+            }
+            return NotFound();
+        }
+
+        [Authorize]
+        [HttpPost("OrderBook")]
+        public ActionResult OrderBook(int userId, int bookId)
+        {
+            var canOrder = _db.orders.Count(o => o.UserId == userId && !o.Returned) < 3;
+
+            if (canOrder)
+            {
+                _db.orders.Add(new()
+                {
+                    UserId = userId,
+                    BookId = bookId,
+                    OrderDate = DateTime.Now,
+                    ReturnDate = null,
+                    Returned = false,
+                    FinePaid = 0
+                });
+
+                var book = _db.books.Find(bookId);
+                if (book is not null)
+                {
+                    book.Ordered = true;
+                }
+
+
+                _db.SaveChanges();
+                return Ok("ordered");
+            }
+
+            return Ok("cannot order");
         }
 
 
