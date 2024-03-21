@@ -53,6 +53,11 @@ import { BookStoreComponent } from './books/book-store/book-store.component';
 import { UserOrdersComponent } from './users/user-orders/user-orders.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { MaintenanceComponent } from './books/maintenance/maintenance.component';
+import { ReturnBookComponent } from './books/return-book/return-book.component';
+import { PageTableComponent } from './components/page-table/page-table.component';
+import { ApprovalRequestsComponent } from './users/approval-requests/approval-requests.component';
+import { AllOrdersComponent } from './users/all-orders/all-orders.component';
+import { ViewUsersComponent } from './users/view-users/view-users.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +71,12 @@ import { MaintenanceComponent } from './books/maintenance/maintenance.component'
     BookStoreComponent,
     UserOrdersComponent,
     ProfileComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    ReturnBookComponent,
+    PageTableComponent,
+    ApprovalRequestsComponent,
+    AllOrdersComponent,
+    ViewUsersComponent
   ],
   imports: [
     BrowserModule,

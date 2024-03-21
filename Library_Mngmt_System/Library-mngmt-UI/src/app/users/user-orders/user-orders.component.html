@@ -6,9 +6,9 @@
     </mat-card>
 
     @if (pendingReturns.length > 0) {
-    <!-- <page-table [columns]="columnsForPendingReturns"
+    <app-page-table [columns]="columnsForPendingReturns"
                 [dataSource]="pendingReturns">
-    </page-table> -->
+    </app-page-table>
     }
     @else {
     <mat-card>
@@ -29,9 +29,9 @@
     </mat-card>
 
     @if (completedReturns.length > 0) {
-    <!-- <page-table [columns]="columnsForCompletedReturns"
+    <app-page-table [columns]="columnsForCompletedReturns"
                 [dataSource]="completedReturns">
-    </page-table> -->
+    </app-page-table>
     }
     @else {
     <mat-card>
