@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { MusicListComponent } from './music-list/music-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddMusicComponent } from './add-music/add-music.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MusicListComponent
+    MusicListComponent,
+    AddMusicComponent
   ],
   imports: [
     BrowserModule,
