@@ -1,0 +1,42 @@
+<div class="container my-5">
+    <h1 class="mb-3">Update Music</h1>
+   <div class="row ">
+    <div class="col-6">
+        <form #form = "ngForm">
+            <div class="mb-3">
+                <label  class="form-label">Id</label>
+                <input type="text" class="form-control" id="id" name="id" [(ngModel)]="MusicDetails.id" readonly>   
+              </div>
+            <div class="mb-3">
+              <label  class="form-label">Song Name</label>
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="MusicDetails.songName">   
+            </div>
+
+            <div class="mb-3">
+                <label  class="form-label">Singer Name</label>
+                <input type="text" class="form-control" id="singer" name="singer" [(ngModel)]="MusicDetails.singerName">   
+              </div>
+
+              <div class="mb-3">
+                <label  class="form-label">Release Year</label>
+                <input type="text" class="form-control" id="release" name="release" [(ngModel)]="MusicDetails.releaseYear">   
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Movie Name</label>
+                <input type="text" class="form-control" id="movie" name="movie" [(ngModel)]="MusicDetails.movieName">   
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Song Category</label>
+                <input type="text" class="form-control" id="song" name="song" [(ngModel)]="MusicDetails.songType">   
+              </div>
+
+                      
+            <button type="submit"   class="btn btn-primary mt-3" (click)="update()">Save</button>
+            <button type="button"   class="btn btn-danger mt-3" (click)="delete(MusicDetails.id)">Delete</button>
+          </form>
+          </div>
+          </div>
+   
+</div>

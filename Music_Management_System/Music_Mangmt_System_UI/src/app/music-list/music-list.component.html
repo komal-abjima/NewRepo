@@ -9,6 +9,7 @@
                 <th>Release Year</th>
                 <th>Movie Name</th>
                 <th>Song Type</th>
+                <th></th>
 
             </tr>
         </thead>
@@ -20,6 +21,8 @@
             <td>{{musics.releaseYear}}</td>
             <td>{{musics.movieName}}</td>
             <td>{{musics.songType}}</td>
+            <td><a [routerLink]="['edit', musics.id ]">View</a></td>
+
 
 
 

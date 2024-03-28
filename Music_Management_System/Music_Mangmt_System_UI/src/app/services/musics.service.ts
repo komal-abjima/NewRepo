@@ -15,4 +15,19 @@ export class MusicsService {
   getAll(): Observable<Music[]>{
     return this.http.get<Music[]>(this.apiUrl + '/api/Music');
   }
+
+  addMusic(addNewMusic: Music): Observable<Music> {
+    return this.http.post<Music>(this.apiUrl + '/api/Music', addNewMusic);
+  }
+
+  getMusicById(id: string):Observable<Music>{
+    return this.http.get<Music>(this.apiUrl + '/api/Music/'+ id);
+  }
+
+  updateMusic(id: string, updateMusic: Music): Observable<Music>{
+    return this.http.put<Music>(this.apiUrl + '/api/Music/'+ id, updateMusic);
+  }
+  delete(id:string):Observable<Music>{
+    return this.http.delete<Music>(this.apiUrl + '/api/Music/'+ id);
+  }
 }
