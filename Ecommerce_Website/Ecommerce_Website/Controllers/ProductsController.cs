@@ -29,17 +29,18 @@ namespace Ecommerce_Website.Controllers
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> GetProduct([FromRoute] int id)
         {
-            var product = await _context.products.FindAsync(id);
+            var product = await _context.products.FirstOrDefaultAsync(x => x.id == id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return Ok(product);
         }
 
         // PUT: api/Products/5

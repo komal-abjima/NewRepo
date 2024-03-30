@@ -1,4 +1,5 @@
 ﻿using Ecommerce_Website.Models;
+using Ecommerce_Website.Models.Employee_Mngmt_Project.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce_Website.Data
@@ -11,6 +12,8 @@ namespace Ecommerce_Website.Data
         }
 
         public DbSet<Product> products { get; set; }
+
+        public DbSet<UserModel> users { get; set; }
 
     }
 }

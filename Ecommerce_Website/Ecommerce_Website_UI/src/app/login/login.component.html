@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="box">
+                    <div class="text-center mb-4">
+                        <h1>Login</h1>
+                        <h6> Please enter your login and password!</h6>
+                    </div>
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" formControlName="fullname" class="form-control" id="fullname" placeholder="Full Name">
+                            <span class="text-danger" *ngIf="loginForm.controls['fullname'].dirty && loginForm.hasError('required','fullname')">*Full Name is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="text" formControlName="username" class="form-control" id="username"  placeholder="Enter User Name">
+                            <small class="form-text text-muted">We'll never share your email with anyone else.</small><br>
+                            <span class="text-danger" *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">*Username is required</span>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <span class="text-danger" *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">*Password is required</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Login</button>
+                    </form>
+                    <a routerLink='/signup' style="float: right;color:#fff">New User? Click to SignUp!</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

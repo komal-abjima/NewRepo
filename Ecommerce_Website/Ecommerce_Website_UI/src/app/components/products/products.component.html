@@ -14,8 +14,8 @@
       <li class="list-group-item"><b>Rating : </b>{{product.rating}}</li>
     </ul>
     <div class="card-body">
-      <a href="#" class="card-link" [routerLink]="['Products', products.id ]">View Product</a>
-      <a href="#" class="card-link">Add To Cart</a>
+      <a  class="card-link" routerLink="Products/{{product.id}}">View Product</a>
+      <a  class="card-link">Add To Cart</a>
     </div>
   </div>
 </div>

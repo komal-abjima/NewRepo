@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home">Amazon</a>
+      <a class="navbar-brand" routerLink="/">Amazon</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+            <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" >About Us</a>
@@ -15,6 +15,19 @@
           <li class="nav-item">
             <a class="nav-link" >Contact US</a>
           </li>
+          <!-- right navbar -->
+          <ul class="navbar-nav right"> 
+            <li class="nav-item"> 
+                <a class="nav-link" routerLink="/login"> 
+                  Login/Signup
+                </a> 
+            </li> 
+            <li class="nav-item"> 
+                <a class="nav-link" href="#"> 
+                   LogOut
+                </a> 
+            </li> 
+            </ul>
           
          
         </ul>

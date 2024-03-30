@@ -10,6 +10,7 @@ import { Products } from '../models/products.model';
 })
 export class ProductsService {
   apiUrl: string = environment.apiURl;
+  loginAPIUrl: string = 'https://localhost:7046/api/Login/';
   constructor(private http: HttpClient, private router: Router) { }
 
   getAll(): Observable<Products[]>{
@@ -18,7 +19,15 @@ export class ProductsService {
   }
 
   getById(id: string): Observable<Products>{
-    return this.http.get<Products>(this.apiUrl + '/api/Products' + id);
+    return this.http.get<Products>(this.apiUrl + '/api/Products/' + id);
 
+  }
+
+  signUp(empObj : any){
+    //return this._http.post<any>(this.loginAPIUrl+"signup",empObj)
+    return this.http.post<any>(`${this.loginAPIUrl}signup`,empObj)
+  }
+  login(empObj:any){
+    return this.http.post<any>(`${this.loginAPIUrl}login`,empObj)
   }
 }
