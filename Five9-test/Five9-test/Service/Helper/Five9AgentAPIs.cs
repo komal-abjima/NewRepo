@@ -50,7 +50,7 @@ namespace Five9_test.Service.Helper
             try
             {
                 var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Put, $"https://app-atl.five9.com/appsvcs/rs/svc/agents/{five9LoginApiResponseItem.agentId}/session_start?force=false");
+                var request = new HttpRequestMessage(HttpMethod.Put, $"https://app-atl.five9.com/appsvcs/rs/svc/agents/{five9LoginApiResponseItem.userId}/session_start?force=false");
                 request.Headers.Add("Cookie", $"Authorization=Bearer-{five9LoginApiResponseItem.tokenId};farmId={five9LoginApiResponseItem.context.farmId}");
                 var content = new StringContent("{\r\n \"stationId\": \"\",\r\n \"stationType\": \"EMPTY\"\r\n}", null, "application/json");
                 request.Content = content;
@@ -73,7 +73,7 @@ namespace Five9_test.Service.Helper
             try
             {
                 var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://app-atl.five9.com/appsvcs/rs/svc/supervisors/{responseItem.agentId}/login_state");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://app-atl.five9.com/appsvcs/rs/svc/agents/{responseItem.userId}/login_state");
                 request.Headers.Add("Cookie", $"Authorization=Bearer-{responseItem.tokenId}; farmId={responseItem.context.farmId}");
                 var response = await client.SendAsync(request);
                 var state = await response.Content.ReadAsStringAsync();
