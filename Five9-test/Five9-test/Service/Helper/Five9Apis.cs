@@ -116,9 +116,54 @@ namespace Five9_test.Service.Helper
 
         }
 
+        //starts a campaign 
+        public async Task StartCampaign(Five9LoginApiResponseItem responseItem, string campaignId)
+        {
+            try
+            {
+                var client = new HttpClient();
+                if (!HasPermission(responseItem.permissions, Permission.CAN_START_CAMPAIGNS))
+                {
+                    throw new Exception("User does not have permission to start campaigns.");
+                }
 
-        //get avaialable campaigns
-        public async Task<List<AvailableCampaigns>> getAvailableCampaigns(Five9LoginApiResponseItem responseItem)
+                var request = new HttpRequestMessage(HttpMethod.Put, $"https://app-atl.five9.com/supsvcs/rs/svc/orgs/{responseItem.orgId}/campaigns/{campaignId}/start");
+
+                // Add authorization headers
+                request.Headers.Add("Authorization", $"Bearer {responseItem.tokenId}");
+                request.Headers.Add("farmId", responseItem.context.farmId);
+
+                var response = await client.SendAsync(request);
+
+                
+                response.EnsureSuccessStatusCode();
+
+                // If response is successful, no content is expected
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Failed to start campaign. Status code: {response.StatusCode}");
+                }
+
+                // If response is empty, return
+                return;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Failed to start campaign. Error: {ex.Message}");
+            }
+        }
+
+        private bool HasPermission(List<Permission> permissions, Permission requiredPermission)
+        {
+            return permissions.Contains(requiredPermission);
+        }
+ 
+
+
+
+
+    //get avaialable campaigns
+    public async Task<List<AvailableCampaignsModel>> getAvailableCampaigns(Five9LoginApiResponseItem responseItem)
         {
 
             try
@@ -133,7 +178,7 @@ namespace Five9_test.Service.Helper
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
                 var result = await response.Content.ReadAsStreamAsync();
-                var campaigns = await JsonSerializer.DeserializeAsync<List<AvailableCampaigns>>(result);
+                var campaigns = await JsonSerializer.DeserializeAsync<List<AvailableCampaignsModel>>(result);
                 return campaigns;
             }
             catch (HttpRequestException ex)

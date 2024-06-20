@@ -12,16 +12,16 @@
         //public string type { get; set; }
 
         public string name { get; set; }
-        public string? extension { get; set; }
-        public string? id { get; set; }
-        public string[]? lists { get; set; }
-        public string[]? skills { get; set; }
+        public string extension { get; set; }
+        public string id { get; set; }
+        public string[] lists { get; set; }
+        public string[] skills { get; set; }
         public string state { get; set; }
         public string type { get; set; }
 
 
 
     }
-
     
+
 }

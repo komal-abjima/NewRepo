@@ -10,6 +10,7 @@ namespace Five9_test.Service.Interface
 
         Task<List<SupervisorAgentInfo>> getAgents();
         Task<List<Campaigns>> getInboundCampaigns();
-        Task<List<AvailableCampaigns>> getavailableCampaigns();
+        Task<List<AvailableCampaignsModel>> getavailableCampaigns();
+        Task<List<CampaignsConfigInfo>> getCampaignsAvailtoAgents();
     }
 }

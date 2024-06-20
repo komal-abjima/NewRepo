@@ -16,12 +16,21 @@ namespace Five9_test.Service
         }
       
 
-        //getallcampaigns
+        //getallcampaigns -supervisor
         public async Task<List<Campaigns>> getCampaigns()
         {
             Five9Apis _apis = new Five9Apis(_configuration);
             var loginResponse = await _apis.Login();
             var res = await _apis.getCampaigns(loginResponse);
+            return res;
+        }
+
+        //start a campaign - supervisor
+        public async Task StartCampaign()
+        {
+            Five9Apis _apis = new Five9Apis(_configuration);
+            var loginResponse = await _apis.Login();
+            var res = await _apis.StartCampaign(loginResponse);
             return res;
         }
 
@@ -43,11 +52,21 @@ namespace Five9_test.Service
             return res;
         }
         //get a list of agents
-        public async Task<List<AvailableCampaigns>> getavailableCampaigns()
+        public async Task<List<AvailableCampaignsModel>> getavailableCampaigns()
         {
             Five9Apis _apis = new Five9Apis(_configuration);
             var loginResponse = await _apis.Login();
             var res = await _apis.getAvailableCampaigns(loginResponse);
+            return res;
+        }
+
+
+        //gets the campaigns available to the agent
+        public async Task<List<CampaignsConfigInfo>> getCampaignsAvailtoAgents()
+        {
+            Five9AgentAPIs _apis = new Five9AgentAPIs(_configuration);
+            var loginResponse = await _apis.Login();
+            var res = await _apis.getCampaignsAvailtoAgents(loginResponse);
             return res;
         }
 
